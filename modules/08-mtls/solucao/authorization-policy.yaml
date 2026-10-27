@@ -1,0 +1,22 @@
+apiVersion: security.istio.io/v1
+kind: AuthorizationPolicy
+metadata:
+  name: catalog-allow-storefront
+  namespace: lab
+spec:
+  selector:
+    matchLabels:
+      app: catalog
+  action: ALLOW
+  rules:
+    - to:
+        - operation:
+            methods: ["GET"]
+            paths: ["/health", "/ready", "/admin/*"]
+    - from:
+        - source:
+            principals: ["cluster.local/ns/lab/sa/storefront"]
+      to:
+        - operation:
+            methods: ["GET"]
+            paths: ["/items/*"]

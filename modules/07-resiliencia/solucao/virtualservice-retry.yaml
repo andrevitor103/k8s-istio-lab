@@ -1,0 +1,21 @@
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: catalog
+  namespace: lab
+spec:
+  hosts:
+    - catalog
+    - catalog.lab.svc.cluster.local
+  http:
+    - timeout: 2s
+      retries:
+        attempts: 2
+        perTryTimeout: 1s
+        retryOn: 5xx,reset,connect-failure
+      route:
+        - destination:
+            host: catalog.lab.svc.cluster.local
+            port:
+              number: 8080
+            subset: v1

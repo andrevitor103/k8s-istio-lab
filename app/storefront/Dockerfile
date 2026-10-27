@@ -1,0 +1,8 @@
+FROM python:3.12-alpine
+
+WORKDIR /app
+COPY app.py .
+ENV PYTHONDONTWRITEBYTECODE=1
+EXPOSE 8080
+USER 65534:65534
+CMD ["python", "-u", "app.py"]

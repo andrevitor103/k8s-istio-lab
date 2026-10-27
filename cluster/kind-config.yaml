@@ -1,0 +1,22 @@
+# Cluster local do laboratório.
+# As portas 80 e 443 do control-plane saem em 127.0.0.1 na sua máquina.
+# O Ingress (módulo 04) e o gateway do Istio (módulo 06) usam essas portas
+# em momentos diferentes: os dois não podem escutar juntas.
+kind: Cluster
+apiVersion: kind.x-k8s.io/v1alpha4
+name: k8s-istio-lab
+nodes:
+  - role: control-plane
+    labels:
+      ingress-ready: "true"
+    extraPortMappings:
+      - containerPort: 80
+        hostPort: 80
+        listenAddress: "127.0.0.1"
+        protocol: TCP
+      - containerPort: 443
+        hostPort: 443
+        listenAddress: "127.0.0.1"
+        protocol: TCP
+  - role: worker
+  - role: worker

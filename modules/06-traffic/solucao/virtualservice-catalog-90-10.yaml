@@ -1,0 +1,23 @@
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: catalog
+  namespace: lab
+spec:
+  hosts:
+    - catalog
+    - catalog.lab.svc.cluster.local
+  http:
+    - route:
+        - destination:
+            host: catalog.lab.svc.cluster.local
+            port:
+              number: 8080
+            subset: v1
+          weight: 90
+        - destination:
+            host: catalog.lab.svc.cluster.local
+            port:
+              number: 8080
+            subset: v2
+          weight: 10

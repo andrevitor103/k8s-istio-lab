@@ -1,0 +1,16 @@
+apiVersion: networking.istio.io/v1
+kind: VirtualService
+metadata:
+  name: storefront
+  namespace: lab
+spec:
+  hosts:
+    - store.lab.test
+  gateways:
+    - lab-gateway
+  http:
+    - route:
+        - destination:
+            host: storefront.lab.svc.cluster.local
+            port:
+              number: 8080

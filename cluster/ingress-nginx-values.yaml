@@ -1,0 +1,14 @@
+# Valores do ingress-nginx para o kind deste lab.
+# hostNetwork faz o controller escutar nas portas 80/443 do nó.
+# O kind encaminha essas portas do control-plane para 127.0.0.1.
+controller:
+  hostNetwork: true
+  dnsPolicy: ClusterFirstWithHostNet
+  nodeSelector:
+    ingress-ready: "true"
+  tolerations:
+    - key: node-role.kubernetes.io/control-plane
+      operator: Exists
+      effect: NoSchedule
+  service:
+    type: ClusterIP

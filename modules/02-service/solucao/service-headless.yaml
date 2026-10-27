@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: catalog-headless
+  namespace: lab
+spec:
+  clusterIP: None
+  selector:
+    app: catalog
+  ports:
+    - name: http
+      port: 8080
+      targetPort: http

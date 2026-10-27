@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: storefront
+  namespace: lab
+data:
+  CATALOG_URL: http://catalog.lab.svc.cluster.local:8080

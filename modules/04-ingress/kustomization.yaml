@@ -1,0 +1,10 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+resources:
+  - ../00-ambiente/namespace.yaml
+  - ../03-dois-servicos/configmap.yaml
+  - ../03-dois-servicos/catalog.yaml
+  - ../03-dois-servicos/catalog-service.yaml
+  - ../03-dois-servicos/storefront.yaml
+  - ../03-dois-servicos/storefront-service.yaml
+  - ingress.yaml
